@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Label } from "../../Login/ui/label";
 import { Input } from "../../Login/ui/input";
-import { cn } from "../../Login/utils/cn";
 import axios from "axios";
 
 export default function StudentSignUp() {
@@ -10,22 +9,24 @@ export default function StudentSignUp() {
   const [rollNumber, setRollNumber] = useState("");
   const [password, setPassword] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Simulate a successful signup response
-      const dummyResponse = { data: { message: "Signup successful" } };
-      console.log("Signup successful:", dummyResponse.data.message);
+      const response = await axios.post("/api/signup", {
+        rollNumber,
+        password,
+      });
+      console.log("Signup successful:", response.data.message);
       setSuccessMessage("Signup successful. Redirecting to login page...");
       // Simulate a delay before navigating to login page
       setTimeout(() => {
         navigate("/Student-Login");
       }, 2000); // 2000 milliseconds (2 seconds)
     } catch (error) {
-      // If signup fails, display error message
-      console.error("Signup error:", error);
-      // Handle signup error here
+      console.error("Signup error:", error.response.data.error);
+      setErrorMessage(error.response.data.error);
     }
   };
 
@@ -34,53 +35,59 @@ export default function StudentSignUp() {
   };
 
   return (
-    <div>
-      <div className="min-h-screen flex justify-center items-center bg-gradient-to-r from-green-400 to-blue-400 ">
-        <div className="w-96">
-          <div className="h-[300px] max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
-            <form className="my-8" onSubmit={handleSubmit}>
-              {successMessage && (
-                <div className="absolute top-0 right-0 bg-green-500 text-white p-2 rounded-md mt-4 mr-4">
-                  {successMessage}
-                </div>
-              )}
-              <LabelInputContainer className="mb-4">
-                <Label htmlFor="rollNumber">Roll Number</Label>
-                <Input
-                  id="rollNumber"
-                  placeholder="Enter your roll number"
-                  type="text"
-                  value={rollNumber}
-                  onChange={(e) => setRollNumber(e.target.value)}
-                />
-              </LabelInputContainer>
-              <LabelInputContainer className="mb-4">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  placeholder="••••••••"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </LabelInputContainer>
-              <div className="flex space-x-4">
-                <button
-                  className="bg-red-500 text-white rounded-md py-2 px-4 hover:bg-red-600 focus:outline-none focus:bg-red-600"
-                  type="submit"
-                >
-                  Register
-                </button>
-                <button
-                  className="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-                  type="button"
-                  onClick={handleLoginClick}
-                >
-                  Login
-                </button>
+    <div className="relative min-h-screen flex justify-center items-center bg-gradient-to-r from-green-400 to-blue-400">
+      <div className="w-96 p-5 z-10">
+        <div className="max-w-md w-full mx-auto rounded-none md:rounded-lg p-4 md:p-8 shadow-input bg-white">
+          <h2 className="text-3xl font-semibold text-center mb-6">
+            Student SignUp
+          </h2>
+          <form className="my-8" onSubmit={handleSubmit}>
+            {successMessage && (
+              <div className="absolute top-0 right-0 bg-green-500 text-white p-2 rounded-md mb-4 text-center">
+                {successMessage}
               </div>
-            </form>
-          </div>
+            )}
+            {errorMessage && (
+              <div className="text-red-500 mb-4">{errorMessage}</div>
+            )}
+            <LabelInputContainer>
+              <Label htmlFor="rollNumber">Roll Number</Label>
+              <Input
+                id="rollNumber"
+                placeholder="Enter your roll number"
+                type="text"
+                value={rollNumber}
+                onChange={(e) => setRollNumber(e.target.value)}
+                className="mt-1"
+              />
+            </LabelInputContainer>
+            <LabelInputContainer>
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                placeholder="••••••••"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="mt-1"
+              />
+            </LabelInputContainer>
+            <div className="flex justify-between items-center">
+              <button
+                className="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                type="submit"
+              >
+                Register
+              </button>
+              <button
+                className="text-gray-600 hover:text-gray-800 focus:outline-none"
+                type="button"
+                onClick={handleLoginClick}
+              >
+                Login
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -94,5 +101,5 @@ const LabelInputContainer = ({
   children: React.ReactNode;
   className?: string;
 }) => {
-  return <div className={cn("mb-4", className)}>{children}</div>;
+  return <div className={className}>{children}</div>;
 };
