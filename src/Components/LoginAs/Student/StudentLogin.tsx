@@ -19,7 +19,9 @@ export default function StudentLogin() {
         cat: "Student",
       }); // Change rollNumber to email
       console.log("Login successful:", response.data);
-      navigate("/dashboard");
+      // Extracting course data from the response
+      const courseData = response.data.course;
+      navigate("/student-dashboard", { state: { courseData } });
     } catch (error) {
       console.error("Login error:", error.response.data.error);
       setError(error.response.data.error);
@@ -48,7 +50,7 @@ export default function StudentLogin() {
                 type="text" // Change text to email
                 value={email} // Change rollNumber to email
                 onChange={(e) => setEmail(e.target.value)} // Change rollNumber to email
-                className="mt-1"
+                className=""
               />
             </LabelInputContainer>
             <LabelInputContainer>
@@ -59,10 +61,10 @@ export default function StudentLogin() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1"
+                className=""
               />
             </LabelInputContainer>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mt-1 ">
               <button
                 className="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
                 type="submit"

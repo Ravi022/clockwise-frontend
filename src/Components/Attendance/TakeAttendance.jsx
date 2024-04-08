@@ -32,10 +32,14 @@ export default function TakeAttendance() {
       students: studentsData,
     });
     try {
-      await axios.post("http://127.0.0.1:8000/attendance/uploadAttendance/", {
-        course_name: selectedCurs,
-        students: studentsData,
-      });
+      const response = await axios.post(
+        "http://127.0.0.1:8000/attendance/uploadAttendance/",
+        {
+          course_name: selectedCurs,
+          students: studentsData,
+        }
+      );
+      console.log(response.data);
       setAttendanceSubmitted(true);
     } catch (error) {
       console.error("Error submitting attendance:", error);

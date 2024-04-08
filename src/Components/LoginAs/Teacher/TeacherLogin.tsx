@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Label } from "../../Login/ui/label";
+import { Input } from "../../Login/ui/input";
+import { LabelInputContainer } from "../../Login/ui/labelInputContainer"; // Import LabelInputContainer
 
 export function TeacherLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +19,7 @@ export function TeacherLogin() {
         password: password,
         cat: "Faculty",
       });
-      console.log("Login successful:", response.data)
+      console.log("Login successful:", response.data);
       navigate("/attendance-page");
     } catch (error) {
       console.error("Login error:", error);
@@ -35,25 +39,25 @@ export function TeacherLogin() {
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="email">Email Address</label>
-            <input
+            <Label htmlFor="email">Email Address</Label>
+            <Input
               id="email"
               placeholder="xyz@iiitg.ac.in"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border rounded-md px-3 py-2 mt-1 w-full"
+              className="border rounded-md px-3 py-2  w-full"
             />
           </div>
           <div className="mb-6">
-            <label htmlFor="password">Password</label>
-            <input
+            <Label htmlFor="password">Password</Label>
+            <Input
               id="password"
               placeholder="••••••••"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border rounded-md px-3 py-2 mt-1 w-full"
+              className="border rounded-md px-3 py-2  w-full"
             />
           </div>
           <div className="flex justify-between items-center">

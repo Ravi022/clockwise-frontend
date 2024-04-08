@@ -67,7 +67,7 @@ export default function StudentSignUp() {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1"
+                className=""
               />
             </LabelInputContainer>
             <LabelInputContainer>
@@ -78,7 +78,7 @@ export default function StudentSignUp() {
                 type="text"
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
-                className="mt-1"
+                className=""
               />
             </LabelInputContainer>
             <LabelInputContainer>
@@ -89,7 +89,7 @@ export default function StudentSignUp() {
                 type="text"
                 value={rollNumber}
                 onChange={(e) => setRollNumber(e.target.value)}
-                className="mt-1"
+                className=""
               />
             </LabelInputContainer>
             <LabelInputContainer>
@@ -100,7 +100,7 @@ export default function StudentSignUp() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1"
+                className=""
               />
             </LabelInputContainer>
             <LabelInputContainer>
@@ -111,10 +111,10 @@ export default function StudentSignUp() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1"
+                className=""
               />
             </LabelInputContainer>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mt-1">
               <button
                 className="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
                 type="submit"

@@ -39,8 +39,8 @@ export default function TeacherSignUp() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gradient-to-r from-green-400 to-blue-400">
-      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
+    <div className="min-h-screen  flex justify-center items-center bg-gradient-to-r from-green-400 to-blue-400">
+      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md w-[350px]">
         <h2 className="text-3xl font-semibold text-center mb-6">
           Teacher SignUp
         </h2>
