@@ -27,6 +27,10 @@ export default function TakeAttendance() {
   };
 
   const handleSubmitAttendance = async () => {
+    console.log({
+      course_name: selectedCurs,
+      students: studentsData,
+    });
     try {
       await axios.post("http://127.0.0.1:8000/attendance/uploadAttendance/", {
         course_name: selectedCurs,
