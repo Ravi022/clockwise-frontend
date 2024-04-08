@@ -6,6 +6,8 @@ import axios from "axios";
 
 export default function TeacherSignUp() {
   const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [id, setId] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -13,9 +15,17 @@ export default function TeacherSignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/signup", { email, password });
-      console.log("Signup successful:", response.data.message);
-      // Assuming backend sends back a success message upon successful signup
+      const response = await axios.post(
+        "http://127.0.0.1:8000/auth/register/",
+        {
+          name: name,
+          id: id,
+          email_id: email,
+          password: password,
+          cat: "Faculty",
+        }
+      ); // Include name and id
+      console.log("Signup successful:", response.data);
       setErrorMessage("");
       navigate("/TeacherLogin");
     } catch (error) {
@@ -40,6 +50,28 @@ export default function TeacherSignUp() {
               {errorMessage}
             </div>
           )}
+          <div className="flex flex-col space-y-1">
+            <Label htmlFor="name">Name</Label>
+            <Input
+              id="name"
+              placeholder="Enter your name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none"
+            />
+          </div>
+          <div className="flex flex-col space-y-1">
+            <Label htmlFor="id">ID</Label>
+            <Input
+              id="id"
+              placeholder="Enter your ID"
+              type="text"
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none"
+            />
+          </div>
           <div className="flex flex-col space-y-1">
             <Label htmlFor="email">Email</Label>
             <Input

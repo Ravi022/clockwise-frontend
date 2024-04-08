@@ -13,8 +13,12 @@ export default function StudentLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/login", { email, password }); // Change rollNumber to email
-      console.log("Login successful:", response.data.message);
+      const response = await axios.post("http://127.0.0.1:8000/auth/login/", {
+        email: email,
+        password: password,
+        cat: "Student",
+      }); // Change rollNumber to email
+      console.log("Login successful:", response.data);
       navigate("/dashboard");
     } catch (error) {
       console.error("Login error:", error.response.data.error);

@@ -10,8 +10,12 @@ export function TeacherLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/login", { email, password });
-      console.log("Login successful:", response.data.message);
+      const response = await axios.post("http://127.0.0.1:8000/auth/login/", {
+        email: email,
+        password: password,
+        cat: "Faculty",
+      });
+      console.log("Login successful:", response.data)
       navigate("/attendance-page");
     } catch (error) {
       console.error("Login error:", error);
