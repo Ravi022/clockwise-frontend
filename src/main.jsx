@@ -18,6 +18,7 @@ import TeacherSignup from "./Components/LoginAs/Teacher/TeacherSignup";
 import Attendance from "./Components/Attendance/Attendance";
 import Student from "./Components/LoginAs/Student/Student";
 import StudentSignUp from "./Components/LoginAs/Student/StudentSignUp";
+import TakeAttendance from "./Components/Attendance/TakeAttendance";
 // import App from "./App.jsx";
 
 const router = createBrowserRouter([
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
       { path: "/Student-Login", element: <Student /> },
       { path: "/Student-Signup", element: <StudentSignUp /> },
       { path: "/Teacher-Signup", element: <TeacherSignup /> },
+      { path: "/take-attendance", element: <TakeAttendance /> },
       { path: "/users", element: <Users /> },
       { path: "/messages", element: <Messages /> },
       { path: "/analytics", element: <Analytics /> },
