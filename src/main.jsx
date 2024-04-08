@@ -13,7 +13,7 @@ import Setting from "./pages/Setting";
 import Layout from "./Layout";
 import LoginAs from "./Components/LoginAs/LoginAs";
 import Teacher from "./Components/LoginAs/Teacher/Teacher";
-import StudentLogin from "./Components/LoginAs/Student/StudentLogin";
+// import StudentLogin from "./Components/LoginAs/Student/StudentLogin";f
 import TeacherSignup from "./Components/LoginAs/Teacher/TeacherSignup";
 import Attendance from "./Components/Attendance/Attendance";
 import Student from "./Components/LoginAs/Student/Student";

@@ -1,33 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const DropdownForm = () => {
+const courseMapping = {
+  CS330: "Software Engineering",
+  CS320: "Compilers",
+  CS361: "Computer Security",
+  CS332: "Storage System",
+  HS305: "Advanced communication",
+};
+
+const Attendance = () => {
   const navigate = useNavigate();
   const [selectedCourse, setSelectedCourse] = useState("");
+  const [studentsData, setStudentsData] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent form submission default behavior
 
     try {
-      // Make API request to backend to send selected course value
+      // Make API request to backend to fetch student data for the selected course
       const response = await axios.post(
         "http://127.0.0.1:8000/attendance/getStudent/",
         {
           course_name: selectedCourse,
         }
       );
-      console.log("succesfull ", response.data);
-      // Navigate to "/take-attendance" route upon successful response
-      navigate("/take-attendance");
+      // Update studentsData state with fetched data
+      setStudentsData(response.data.students);
+      console.log(response.data.students);
     } catch (error) {
-      console.error("Error sending course value:", error);
+      console.error("Error fetching student data:", error);
     }
   };
 
   const handleChange = (e) => {
-    setSelectedCourse(e.target.value); // Update selected course state
+    const courseCode = e.target.value;
+    setSelectedCourse(courseCode); // Update selected course state
+    console.log("Selected course:", courseMapping[courseCode]); // Log the course name
   };
+
+  useEffect(() => {
+    // Navigate to "/take-attendance" route when studentsData state is updated
+    if (studentsData.length > 0) {
+      navigate("/take-attendance", { state: { studentsData, selectedCourse } });
+    }
+  }, [studentsData, navigate, selectedCourse]);
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
@@ -63,4 +81,4 @@ const DropdownForm = () => {
   );
 };
 
-export default DropdownForm;
+export default Attendance;
