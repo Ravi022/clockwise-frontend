@@ -6,7 +6,7 @@ import axios from "axios";
 
 export default function StudentSignUp() {
   const navigate = useNavigate();
-  const [rollNumber, setRollNumber] = useState("");
+  const [email, setEmail] = useState(""); // Change rollNumber to email
   const [password, setPassword] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -15,7 +15,7 @@ export default function StudentSignUp() {
     e.preventDefault();
     try {
       const response = await axios.post("/api/signup", {
-        rollNumber,
+        email, // Change rollNumber to email
         password,
       });
       console.log("Signup successful:", response.data.message);
@@ -51,13 +51,14 @@ export default function StudentSignUp() {
               <div className="text-red-500 mb-4">{errorMessage}</div>
             )}
             <LabelInputContainer>
-              <Label htmlFor="rollNumber">Roll Number</Label>
+              <Label htmlFor="email">Email</Label>{" "}
+              {/* Change Roll Number to Email */}
               <Input
-                id="rollNumber"
-                placeholder="Enter your roll number"
-                type="text"
-                value={rollNumber}
-                onChange={(e) => setRollNumber(e.target.value)}
+                id="email" // Change rollNumber to email
+                placeholder="Enter your email" // Change Roll Number to Email
+                type="text" // Change text to email
+                value={email} // Change rollNumber to email
+                onChange={(e) => setEmail(e.target.value)} // Change rollNumber to email
                 className="mt-1"
               />
             </LabelInputContainer>

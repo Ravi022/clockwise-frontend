@@ -6,14 +6,14 @@ import axios from "axios";
 
 export default function StudentLogin() {
   const navigate = useNavigate();
-  const [rollNumber, setRollNumber] = useState("");
+  const [email, setEmail] = useState(""); // Change rollNumber to email
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/login", { rollNumber, password });
+      const response = await axios.post("/api/login", { email, password }); // Change rollNumber to email
       console.log("Login successful:", response.data.message);
       navigate("/dashboard");
     } catch (error) {
@@ -36,13 +36,14 @@ export default function StudentLogin() {
           <form className="my-8" onSubmit={handleSubmit}>
             {error && <div className="text-red-500 mb-4">{error}</div>}
             <LabelInputContainer>
-              <Label htmlFor="rollNumber">Roll Number</Label>
+              <Label htmlFor="email">Email</Label>{" "}
+              {/* Change Roll Number to Email */}
               <Input
-                id="rollNumber"
-                placeholder="Enter your roll number"
-                type="text"
-                value={rollNumber}
-                onChange={(e) => setRollNumber(e.target.value)}
+                id="email" // Change rollNumber to email
+                placeholder="Enter your email" // Change Roll Number to Email
+                type="text" // Change text to email
+                value={email} // Change rollNumber to email
+                onChange={(e) => setEmail(e.target.value)} // Change rollNumber to email
                 className="mt-1"
               />
             </LabelInputContainer>
