@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./index.css";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/StudentDashBoard/Dashboard";
 import Users from "./pages/Users";
 import Messages from "./pages/Messages";
 import FileManager from "./pages/FileManager";
@@ -20,6 +20,8 @@ import Student from "./Components/LoginAs/Student/Student";
 import StudentSignUp from "./Components/LoginAs/Student/StudentSignUp";
 import TakeAttendance from "./Components/Attendance/TakeAttendance";
 import StudentDashBoard from "./Components/StudentDashBoard/StudentDashBoard";
+import Admin from "./Components/LoginAs/Admin/Admin";
+import AdminDashBoard from "./Components/AdminDashBoard/AdminDashBoard";
 // import App from "./App.jsx";
 
 const router = createBrowserRouter([
@@ -39,6 +41,8 @@ const router = createBrowserRouter([
         element: <Attendance />,
       },
       { path: "/Student-Login", element: <Student /> },
+      { path: "/Admin-Login", element: <Admin /> },
+      { path: "/admin-dashboard", element: <AdminDashBoard /> },
       { path: "/Student-Signup", element: <StudentSignUp /> },
       { path: "/Teacher-Signup", element: <TeacherSignup /> },
       { path: "/take-attendance", element: <TakeAttendance /> },
