@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function TakeAttendance() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [studentsData, setStudentsData] = useState([]);
   const [selectedCurs, setSelectedCurs] = useState("");
   const [attendanceSubmitted, setAttendanceSubmitted] = useState(false);
@@ -27,10 +28,6 @@ export default function TakeAttendance() {
   };
 
   const handleSubmitAttendance = async () => {
-    console.log({
-      course_name: selectedCurs,
-      students: studentsData,
-    });
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/attendance/uploadAttendance/",
@@ -46,22 +43,20 @@ export default function TakeAttendance() {
     }
   };
 
+  const handleNavigateToHome = () => {
+    navigate("/home");
+  };
+
+  const handleGoBack = () => {
+    navigate(-1); // Go back one step in history
+  };
+
   return (
-    <div
-      className="container mx-auto px-4"
-      style={{ maxHeight: "80vh", overflowY: "auto" }}
-    >
-      <h1 className="text-3xl font-semibold mb-4">
-        Attendance Page For {selectedCurs}
-      </h1>
+    <div className="container mx-auto px-4" style={{ maxHeight: "80vh", overflowY: "auto" }}>
+      <h1 className="text-3xl font-semibold mb-4">Attendance Page For {selectedCurs}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {studentsData.map((student, index) => (
           <div key={index} className="bg-white rounded-lg shadow-md flex">
-            {/* <img
-              src="https://via.placeholder.com/150"
-              alt="Profile"
-              className="rounded-full my-auto ml-4"
-            /> */}
             <div className="flex-grow p-4">
               <h2 className="text-xl font-semibold">{student.name}</h2>
               <p className="text-gray-600">Roll No: {student.roll_no}</p>
@@ -87,10 +82,33 @@ export default function TakeAttendance() {
         Submit Attendance
       </button>
       {attendanceSubmitted && (
-        <div className="text-green-600 font-semibold mt-2">
-          Attendance Submitted Successfully
-        </div>
+        <SuccessCard handleNavigateToHome={handleNavigateToHome} handleGoBack={handleGoBack} />
       )}
+    </div>
+  );
+}
+
+function SuccessCard({ handleNavigateToHome, handleGoBack }) {
+  return (
+    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-900 bg-opacity-50 z-50">
+      <div className="bg-white rounded-lg p-8 shadow-md text-center">
+        <div className="text-green-500 text-6xl mb-4">&#10003;</div>
+        <div className="text-lg font-semibold mb-4">Attendance Submitted Successfully</div>
+        <div className="flex justify-center">
+          <button
+            onClick={handleNavigateToHome}
+            className="bg-blue-500 text-white rounded-md py-2 px-4 mr-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+          >
+            Go to Home
+          </button>
+          <button
+            onClick={handleGoBack}
+            className="text-gray-600 hover:text-gray-800 focus:outline-none"
+          >
+            Go Back
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -22,8 +22,8 @@ export default function StudentSignUp() {
         {
           name,
           department,
-          rollNumber,
-          email,
+          id: rollNumber,
+          email_id: email,
           password,
           cat: "Student",
         }

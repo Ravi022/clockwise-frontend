@@ -15,8 +15,8 @@ export default function LoginAs() {
   return (
     <div className="absolute w-full h-full bg-gradient-to-r from-green-400 to-blue-400">
       <div className="relative w-full h-full  inset-0 flex justify-center items-center z-50 bg-opacity-50">
-        <div className="bg-white rounded-lg p-8 max-w-md">
-          <h2 className="text-2xl font-bold mb-4">Login As</h2>
+        <div className="bg-white rounded-lg p-10 max-w-md">
+          <h2 className="text-2xl font-bold mb-4 flex justify-center p-3">Login As</h2>
           <div className="flex justify-between">
             <button
               type="button"

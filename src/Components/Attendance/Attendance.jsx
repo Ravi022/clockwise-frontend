@@ -48,35 +48,39 @@ const Attendance = () => {
   }, [studentsData, navigate, selectedCourse]);
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="w-64 p-8 bg-white rounded-lg shadow-md"
-      >
-        <h2 className="text-xl font-semibold mb-4 text-center">
-          Select Course
-        </h2>
-        <div className="flex flex-col mb-4">
-          <select
-            value={selectedCourse}
-            onChange={handleChange}
-            className="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-          >
-            <option value="">Select a course</option>
-            <option value="CS330">Software Engineering</option>
-            <option value="CS320">Compilers</option>
-            <option value="CS361">Computer Security</option>
-            <option value="CS332">Storage System</option>
-            <option value="HS305">Advanced communication</option>
-          </select>
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white rounded-md py-2 px-4 mt-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+    <div className="bg-gradient-to-r from-green-400 to-blue-400">
+      <div className="flex justify-center items-center h-screen">
+        <form
+          onSubmit={handleSubmit}
+          className="w-64 p-10 bg-white rounded-lg shadow-md"
         >
-          Submit
-        </button>
-      </form>
+          <h2 className="text-xl font-semibold mb-4 text-center">
+            Select Course
+          </h2>
+          <div className="flex flex-col mb-4">
+            <select
+              value={selectedCourse}
+              onChange={handleChange}
+              className="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+            >
+              <option value="">Select a course</option>
+              <option value="CS330">Software Engineering</option>
+              <option value="CS320">Compilers</option>
+              <option value="CS361">Computer Security</option>
+              <option value="CS332">Storage System</option>
+              <option value="HS305">Advanced communication</option>
+            </select>
+          </div>
+          <div className="flex justify-center w-full ">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white rounded-md py-2 px-4 mt-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Label } from "../../Login/ui/label";
 import { Input } from "../../Login/ui/input";
-import { LabelInputContainer } from "../../Login/ui/labelInputContainer"; // Import LabelInputContainer
 
 export function TeacherLogin() {
   const navigate = useNavigate();
